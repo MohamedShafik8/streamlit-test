@@ -1,3 +1,6 @@
 langchain
 streamlit
 openai
+--upgrade google-api-python-client
+--upgrade google-auth-oauthlib
+--upgrade google-auth-httplib2
