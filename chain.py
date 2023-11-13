@@ -6,7 +6,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks import StreamlitCallbackHandler
 from langchain.agents.agent_toolkits import GmailToolkit
 from langchain.tools.gmail.utils import build_resource_service, get_gmail_credentials
-from langchain import OpenAI
+from langchain.llms import OpenAI
 from langchain.agents import initialize_agent, AgentType
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent, AgentOutputParser
 from langchain.prompts import BaseChatPromptTemplate
@@ -183,12 +183,20 @@ if submit_button:
     with st.container():
         st.markdown("### Your output in your inbox!")
         feedback = st.text_area("Would you like the output to be send to you, provide the email here.")
-        gmail_send = st.button('Submit', key='gmail_send_button')
-        if gmail_send:
-            print(feedback)
+        email2="""send an email ,subject: Welcome to Life Solutions!, input message:Welcome to Life solutions!"""
+        text=response
+        final_output= email2+text+feedback
+        gmail(final_output)
+        #gmail_send = st.button('Submit', key='gmail_send_button')
+    #if gmail_send:
+        #print(feedback)
+        #print(response)
             #first="""send an email,subject: Welcome to Life Solutions!, input message:Welcome to Life solutions!"""
             #input= first + response.content +"// recipents:"+ feedback
-            gmail(input)
+        #email2="""send an email ,subject: Welcome to Life Solutions!, input message:Welcome to Life solutions!"""
+        #text=response.content
+        #final_output= email2+text+feedback
+        #gmail(final_output)
 
 
 
