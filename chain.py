@@ -131,41 +131,6 @@ def get_completion(relation, emotion, resolution, context):
     return response.content
 
 
-global chat_start
-chat_start = 'Hello, I am the AiOS Inter Accomplish Assistant. I am here to help you with conflict resolution and related subjects. Can I assist you further with any question you may have about my initial recommendation?'
-
-def run_chat(ans):
-    global chat_start
-    openai_history.clear()
-    context = f'''You are the AiOS Inter Accomplish Assistant, designed to to provide helpful answers to user's questions. The user has a conflict they are trying to resolve, below is the background:
-    Your recommendation: {ans}
-    Please help the user with any questions they may have about your initial recommendation. 
-    '''
-    openai_history.append({'role':'system', 'content':context})
-    openai_history.append({'role':'user', 'content':'Hi!'})
-    openai_history.append({'role':'assistant', 'content':chat_start})
-    return
-
-def get_chat_completion(message, chat_history):
-    openai_history.append({'role':'user', 'content':message})
-
-    response = openai.ChatCompletion.create(
-        model='gpt-4',
-        messages=openai_history,
-    ).choices[0].message["content"]
-
-    openai_history.append({'role':'assistant', 'content':response})
-    chat_history.append((message, response))
-
-    return '', chat_history
-
-
-if 'chat_history' not in st.session_state:
-    st.session_state['chat_history'] = []
-
-if 'chat_active' not in st.session_state:
-    st.session_state['chat_active'] = False
-
 # UI elements
 st.title('AiOS Inter Accomplish Assistant')
 
